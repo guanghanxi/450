@@ -1,0 +1,104 @@
+{% extends "base_generic.html" %}
+{% block content %}
+
+    <script language="javascript">
+
+    </script>
+
+    <h2>Please Choose Material and Input Volumes</h2>
+
+    <br>
+
+    <form name = "form" method = "POST" >{% csrf_token %}
+
+        <label for="life">Anticipated Service Life</label>
+        <input type = "text"  placeholder = "0" value = "0" name = "life" oninput="this.value=this.value.replace(/[^0-9\.]/g,'')"/>
+
+        <br>
+
+        <label for="area">Area</label>
+        <input type = "text"  placeholder = "0" value = "0" name = "area" oninput="this.value=this.value.replace(/[^0-9\.]/g,'')"/>
+
+        <br>
+
+        <h3>Building Material</h3>
+
+        <br>
+
+        <div class = "content-container" id = 'material-input'>
+            <div class = "material-row">
+               <div class = "material-name">Material Type</div>
+               <div class = "material-volume">Material Volume</div>
+               <div class = "material-trans">Transportation Methods</div>
+            </div>
+            {% for material in material_list %}
+            <div class = "material-row" id="readroot">
+                <p class = "material-name">{{material.name}}</p>
+                <input type = "text" class = "material-volume"  placeholder = "0" value = "0" name = "volume_{{material.id}}" oninput="this.value=this.value.replace(/[^0-9\.]/g,'')"/>
+                <p class = "material-unit">{{material.unit}}</p>
+                <select name = "trans_{{material.id}}" class = "material-trans"  value="1"/>
+                {% for transportation in transportation_list %}
+                    <option value = "{{transportation.id}}">{{transportation.name}}</option>
+                {% endfor %}
+                </select>
+             </div>
+            {% endfor %}
+         </div>
+
+        <br>
+
+        <h3>Construction Stage Energy</h3>
+
+        <br>
+
+        <div class = "content-container" id = 'cons-energy-input'>
+            <div class = "energy-row">
+               <div class = "energy-name">Energy Type</div>
+               <div class = "energy-volume">Energy Volume (Unit: TJ)</div>
+            </div>
+            {% for energy in energy_list %}
+            <div class = "energy-row" >
+                <p class = "energy-name">{{energy.name}}</p>
+                <input type = "text" class = "energy-volume" placeholder = "0" value = "0" name = "cons_volume_{{energy.id}}" oninput="this.value=this.value.replace(/[^0-9\.]/g,'')"/>
+            </div>
+            {% endfor %}
+        </div>
+
+        <br>
+
+        <h3>Demolition Stage Energy</h3>
+
+        <br>
+
+         <div class = "content-container" id = 'dml-energy-input'>
+            <div class = "energy-row">
+               <div class = "energy-name">Energy Type</div>
+               <div class = "energy-volume">Energy Volume (Unit: TJ)</div>
+            </div>
+            {% for energy in energy_list %}
+            <div class = "energy-row" >
+                <p class = "energy-name">{{energy.name}}</p>
+                <input type = "text" class = "energy-volume" placeholder = "0" value = "0" name = "dml_volume_{{energy.id}}" oninput="this.value=this.value.replace(/[^0-9\.]/g,'')"/>
+            </div>
+            {% endfor %}
+        </div>
+
+         <br>
+
+
+         <div style = "max-width:470px;">
+            <center>
+
+               <button style = "border:0px; background-color:#4285F4; margin-top:8%;
+                  height:35px; width:80%;margin-left:19%;" type = "submit"
+                  value = "Evaluate" >
+                  <strong>Evaluate</strong>
+               </button>
+
+            </center>
+         </div>
+
+      </form>
+
+
+{% endblock %}
