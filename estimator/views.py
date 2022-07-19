@@ -13,6 +13,9 @@ def index(request):
 
     context = {
         'num_materials': num_materials,
+        'num_trans':  Transportation.objects.all().count(),
+        'num_energy':  Energy.objects.all().count() + OtherEnergy.objects.all().count(),
+        'num_machine':  Machine.objects.all().count(),
     }
 
     # Render the HTML template index.html with the data in the context variable
@@ -70,4 +73,36 @@ class EstimatorView(View):
         ctx =  {"total_emission" :355, "mlist": material_cal, "c_energy_list": cons_energy_cal, "d_energy_list": dml_energy_cal, "life": life, "area": area }
 
         return render(request, 'estimator/evaluate_result.html', ctx)
+
+from django.views import generic
+
+class MaterialListView(generic.ListView):
+    model = Material
+    paginate_by = 20
+
+class TransportationListView(generic.ListView):
+    model = Transportation
+    paginate_by = 30
+
+class EnergyListView(View):
+
+    def get(self, request):
+
+        ctx = {'other_e_list': OtherEnergy.objects.all() , 'energy_list': Energy.objects.all() }
+        return render(request, 'estimator/energy_list.html', ctx)
+
+class MachineListView(generic.ListView):
+    model = Machine
+    paginate_by = 20
+
+
+class MachineDetailView(generic.ListView):
+
+    def get(self, request, pk):
+
+        machines = Machine.objects.get(id=pk)
+
+        ctx = {'machine': machines.name , 'performance': machines.performance, 'mp_list': MachinePerformance.objects.filter(machine = pk) }
+        return render(request, 'estimator/machine_detail.html', ctx)
+
 

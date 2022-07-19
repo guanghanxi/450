@@ -1,0 +1,16 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h1>Machine List</h1>
+    {% if machine_list %}
+    <ul>
+        {% for machine in machine_list %}
+        <li>
+            <a href="{% url 'machine_detail'  machine.id %}">{{ machine.name }} (Performance Index: {{machine.performance}})</a>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+        <p>There are no machines in the database.</p>
+    {% endif %}
+{% endblock %}

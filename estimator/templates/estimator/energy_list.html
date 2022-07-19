@@ -1,0 +1,38 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h1>Material List</h1>
+    {% if energy_list %}
+        <h2>General Energy</h2>
+        <table border="3" cellspacing="10" id="energy">
+            <tr>
+                <th></th> <th>Energy Name</th>  <th>Carbon Emssion Factor (kg C0<sub>2</sub> e/TJ)</th> <th>Carbon Oxidation Rate</th>
+                 <th>Carbon Emission per Carlorific (tC/TJ)</th>
+            </tr>
+        {% for energy in energy_list %}
+            <tr>
+            <td>{{energy.id }}</td> <td>{{ material.name }}({{energy.unit}})</td> <td>{{energy.carbon_emission_factor}}</td> <td>{{energy.carbon_oxidation_rate}} </td>
+            <td>{{energy.carbon_per_carlorific}}</td>
+            </tr>
+        {% endfor %}
+        </table>
+    {% else %}
+        <p>There are no general energy data in the Database.</p>
+    {% endif %}
+    <br>
+    {% if other_e_list %}
+        <h2>Other Energy</h2>
+        <table border="3" cellspacing="10" id = "otherenergy">
+            <tr>
+                <th></th> <th>Material Name</th> <th> Default Carbon Content</th>
+            </tr>
+        {% for energy in other_e_list %}
+            <tr>
+            <td>{{ energy.id }}</td> <td>{{ energy.name }}</td> <td>{{energy.default_carbon_content}} </td>
+            </tr>
+        {% endfor %}
+        </table>
+    {% else %}
+        <p>There are no general energy data in the Database.</p>
+    {% endif %}
+{% endblock %}

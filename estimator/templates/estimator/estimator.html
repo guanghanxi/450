@@ -5,19 +5,23 @@
 
     </script>
 
-    <h2>Please Choose Material and Input Volumes</h2>
+    <h2>Carbon Emission Estimator</h2>
 
     <br>
 
     <form name = "form" method = "POST" >{% csrf_token %}
 
-        <label for="life">Anticipated Service Life</label>
-        <input type = "text"  placeholder = "0" value = "0" name = "life" oninput="this.value=this.value.replace(/[^0-9\.]/g,'')"/>
+        <div id="life">
+        <label for="life">Anticipated Service Life (Year)</label>
+        <input type = "text"  placeholder = "0" value = "0" name = "life"  oninput="this.value=this.value.replace(/[^0-9\.]/g,'')"/>
+        </div>
 
         <br>
 
-        <label for="area">Area</label>
-        <input type = "text"  placeholder = "0" value = "0" name = "area" oninput="this.value=this.value.replace(/[^0-9\.]/g,'')"/>
+        <div id="area">
+        <label for="area">Area (m<sup>2</sup>)</label>
+        <input type = "text"  placeholder = "0" value = "0" name = "area"  oninput="this.value=this.value.replace(/[^0-9\.]/g,'')"/>
+        </div>
 
         <br>
 
@@ -26,7 +30,7 @@
         <br>
 
         <div class = "content-container" id = 'material-input'>
-            <div class = "material-row">
+            <div class = "material-row  headers">
                <div class = "material-name">Material Type</div>
                <div class = "material-volume">Material Volume</div>
                <div class = "material-trans">Transportation Methods</div>
@@ -52,7 +56,7 @@
         <br>
 
         <div class = "content-container" id = 'cons-energy-input'>
-            <div class = "energy-row">
+            <div class = "energy-row  headers">
                <div class = "energy-name">Energy Type</div>
                <div class = "energy-volume">Energy Volume (Unit: TJ)</div>
             </div>
@@ -71,7 +75,7 @@
         <br>
 
          <div class = "content-container" id = 'dml-energy-input'>
-            <div class = "energy-row">
+            <div class = "energy-row  headers">
                <div class = "energy-name">Energy Type</div>
                <div class = "energy-volume">Energy Volume (Unit: TJ)</div>
             </div>
@@ -86,7 +90,7 @@
          <br>
 
 
-         <div style = "max-width:470px;">
+         <div style = "width:80%;">
             <center>
 
                <button style = "border:0px; background-color:#4285F4; margin-top:8%;

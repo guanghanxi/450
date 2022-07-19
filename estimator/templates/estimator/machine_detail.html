@@ -1,0 +1,19 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h1>various specifications of {{machine}}</h1>
+    {% if mp_list %}
+        <table border="3" cellspacing="10">
+            <tr>
+                <th>Specification ({{performance}})</th> <th> Energy Used </th> <th>Energy Volume</th>
+            </tr>
+        {% for mp in mp_list %}
+            <tr>
+            <td>{{ mp.name }}</td> <td>{{mp.energy}}</td> <td>{{mp.energy_volume}} </td>
+            </tr>
+        {% endfor %}
+        </table>
+    {% else %}
+        <p>There are no details for {{machine}}.</p>
+    {% endif %}
+{% endblock %}

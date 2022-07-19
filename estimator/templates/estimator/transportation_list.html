@@ -1,0 +1,20 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h1>Transportation List</h1>
+    {% if transportation_list %}
+        <table border="3" cellspacing="10">
+            <tr>
+                <th></th> <th>Transportation Method</th> <th> Volume </th> <th>Carbon Emssion Factor (kg C0<sub>2</sub> e/(t&iddot km))</th>
+            </tr>
+        {% for trans in transportation_list %}
+            <tr>
+            <td>{{ trans.id }}</td> <td>{{ trans.name }}</td> <td>{% if trans.volume == 0 %}Unlimited{%else%}{{trans.volume}}{{trans.unit}}{% endif %}</td>
+            <td>{{trans.carbon_emission_factor}} </td>
+            </tr>
+        {% endfor %}
+        </table>
+    {% else %}
+        <p>There are no Transportation Methods in the Database.</p>
+    {% endif %}
+{% endblock %}
