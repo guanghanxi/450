@@ -1,7 +1,16 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-    <h1>Material List</h1>
+    <h1>Energy List</h1>
+    <div class="search-div" >
+        <!-- https://www.w3schools.com/howto/howto_css_search_button.asp -->
+        <form>
+            <input type="text" placeholder="Search.." name="search"
+            {% if search %} value="{{ search }}" {% endif %}
+            >
+            <button type="submit"><i class="fa fa-search"></i></button>
+        </form>
+    </div>
     {% if energy_list %}
         <h2>General Energy</h2>
         <table border="3" cellspacing="10" id="energy">
@@ -11,13 +20,13 @@
             </tr>
         {% for energy in energy_list %}
             <tr>
-            <td>{{energy.id }}</td> <td>{{ material.name }}({{energy.unit}})</td> <td>{{energy.carbon_emission_factor}}</td> <td>{{energy.carbon_oxidation_rate}} </td>
+            <td>{{energy.id }}</td> <td>{{ energy.name }}({{energy.unit}})</td> <td>{{energy.carbon_emission_factor}}</td> <td>{{energy.carbon_oxidation_rate}} </td>
             <td>{{energy.carbon_per_carlorific}}</td>
             </tr>
         {% endfor %}
         </table>
     {% else %}
-        <p>There are no general energy data in the Database.</p>
+        <p>There are no general energy data {% if search %}related to {{ search }}{% endif %} in the Database.</p>
     {% endif %}
     <br>
     {% if other_e_list %}
@@ -33,6 +42,6 @@
         {% endfor %}
         </table>
     {% else %}
-        <p>There are no general energy data in the Database.</p>
+        <p>There are no other energy data {% if search %}related to {{ search }}{% endif %} in the Database.</p>
     {% endif %}
 {% endblock %}

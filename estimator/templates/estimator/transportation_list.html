@@ -2,10 +2,19 @@
 
 {% block content %}
     <h1>Transportation List</h1>
+    <div class="search-div" >
+        <!-- https://www.w3schools.com/howto/howto_css_search_button.asp -->
+        <form>
+            <input type="text" placeholder="Search.." name="search"
+            {% if search %} value="{{ search }}" {% endif %}
+            >
+            <button type="submit"><i class="fa fa-search"></i></button>
+        </form>
+    </div>
     {% if transportation_list %}
         <table border="3" cellspacing="10">
             <tr>
-                <th></th> <th>Transportation Method</th> <th> Volume </th> <th>Carbon Emssion Factor (kg C0<sub>2</sub> e/(t&iddot km))</th>
+                <th></th> <th>Transportation Method</th> <th> Volume </th> <th>Carbon Emssion Factor (kg C0<sub>2</sub> e/(t&middot km))</th>
             </tr>
         {% for trans in transportation_list %}
             <tr>
@@ -15,6 +24,6 @@
         {% endfor %}
         </table>
     {% else %}
-        <p>There are no Transportation Methods in the Database.</p>
+        <p>There are no Transportation Methods {% if search %}related to {{ search }}{% endif %} in the Database.</p>
     {% endif %}
 {% endblock %}

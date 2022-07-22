@@ -2,6 +2,57 @@
 {% block content %}
 
     <script language="javascript">
+    var mcount = 1;
+    var ecount = 1;
+    /*
+    function init(){
+        document.getElementById('moreFields').onclick = moreFields;
+        moreFields();
+    }
+    */
+
+
+    function moreFields(name){
+        var count = 0;
+        if(name=="material"){
+            mcount++;
+            count = mcount;
+        }
+        else{
+            ecount++;
+            count = ecount;
+        }
+        var newFields = document.getElementById(name+'-readroot').cloneNode(true);
+        newFields.id = name+"row-"+count;
+        var newField = newFields.childNodes;
+        for (var i=0;i<newField.length;i++) {
+            var theName = newField[i].name
+            if (theName){
+               newField[i].name = theName + "-" + count;
+            }
+        }
+        var insertHere = document.getElementById(name+'-writeroot');
+    	insertHere.parentNode.insertBefore(newFields,insertHere);
+    }
+
+    function lessFields(name){
+        var count = 2;
+        if(name=="material"){
+            if(mcount>1){
+                count = mcount;
+                mcount--;
+            }
+        }
+        else{
+            if(ecount>1){
+                count = ecount;
+                ecount--;
+            }
+        }
+        var rmFields = document.getElementById(name+'row-'+count);
+        rmFields.remove();
+    }
+
 
     </script>
 
@@ -30,26 +81,32 @@
         <br>
 
         <div class = "content-container" id = 'material-input'>
-            <div class = "material-row  headers">
+            <div class = "material-row headers">
                <div class = "material-name">Material Type</div>
                <div class = "material-volume">Material Volume</div>
                <div class = "material-trans">Transportation Methods</div>
             </div>
-            {% for material in material_list %}
-            <div class = "material-row" id="readroot">
-                <p class = "material-name">{{material.name}}</p>
-                <input type = "text" class = "material-volume"  placeholder = "0" value = "0" name = "volume_{{material.id}}" oninput="this.value=this.value.replace(/[^0-9\.]/g,'')"/>
-                <p class = "material-unit">{{material.unit}}</p>
-                <select name = "trans_{{material.id}}" class = "material-trans"  value="1"/>
+            <div class = "material-row" id="material-readroot">
+               <select name = "id-material" class = "material-name"  value="1"/>
+               {% for material in material_list %}
+                  <option value = "{{material.id}}">{{material.name}} ({{material.unit}})</option>
+               {% endfor %}
+               </select>
+               <input type = "text" class = "material-volume"  placeholder = "0" value = "0" name = "volume-material" oninput="this.value=this.value.replace(/[^0-9\.]/g,'')"/>
+                <select name = "trans-material" class = "material-trans"  value="1"/>
                 {% for transportation in transportation_list %}
                     <option value = "{{transportation.id}}">{{transportation.name}}</option>
                 {% endfor %}
                 </select>
-             </div>
-            {% endfor %}
+            </div>
+            <span id="material-writeroot"></span>
+            <div class = "addrm-row">
+                <a href='#' id="moreEnergy" class="add" onclick="moreFields('material')">Add New Material</a>
+                <a href='#' id="lessMaterials" class="rm" onclick="lessFields('material')">Remove Material</a>
+            </div>
          </div>
 
-        <br>
+         <br>
 
         <h3>Construction Stage Energy</h3>
 
@@ -58,39 +115,30 @@
         <div class = "content-container" id = 'cons-energy-input'>
             <div class = "energy-row  headers">
                <div class = "energy-name">Energy Type</div>
-               <div class = "energy-volume">Energy Volume (Unit: TJ)</div>
+               <div class = "energy-volume">Energy Usage Volume (Unit: TJ)</div>
             </div>
-            {% for energy in energy_list %}
-            <div class = "energy-row" >
-                <p class = "energy-name">{{energy.name}}</p>
-                <input type = "text" class = "energy-volume" placeholder = "0" value = "0" name = "cons_volume_{{energy.id}}" oninput="this.value=this.value.replace(/[^0-9\.]/g,'')"/>
-            </div>
-            {% endfor %}
-        </div>
-
-        <br>
-
-        <h3>Demolition Stage Energy</h3>
-
-        <br>
-
-         <div class = "content-container" id = 'dml-energy-input'>
             <div class = "energy-row  headers">
-               <div class = "energy-name">Energy Type</div>
-               <div class = "energy-volume">Energy Volume (Unit: TJ)</div>
+               <div class = "cons-energy-volume">Construction Stage</div>
+               <div class = "dml-energy-volume">Demolition Stage</div>
             </div>
-            {% for energy in energy_list %}
-            <div class = "energy-row" >
-                <p class = "energy-name">{{energy.name}}</p>
-                <input type = "text" class = "energy-volume" placeholder = "0" value = "0" name = "dml_volume_{{energy.id}}" oninput="this.value=this.value.replace(/[^0-9\.]/g,'')"/>
+            <div class = "energy-row" id="energy-readroot">
+                <select name = "id-energy" class = "energy-name"  value="1"/>
+                {% for energy in energy_list %}
+                  <option value = "{{energy.id}}">{{energy.name}} ({{energy.unit}})</option>
+                {% endfor %}
+                <input type = "text" class = "cons-energy-volume" placeholder = "0" value = "0" name = "volume-cons-energy" oninput="this.value=this.value.replace(/[^0-9\.]/g,'')"/>
+                <input type = "text" class = "dml-energy-volume" placeholder = "0" value = "0" name = "volume-dml-energy" oninput="this.value=this.value.replace(/[^0-9\.]/g,'')"/>
             </div>
-            {% endfor %}
+            <span id="energy-writeroot"></span>
+            <div class = "addrm-row">
+                <a href='#energy-writeroot' id="moreEnergy" class="add" onclick="moreFields('energy')">Add New Energy</a>
+                <a href='#energy-writeroot' id="lessEnergy" class="rm" onclick="lessFields('energy')">Remove Energy</a>
+            </div>
         </div>
 
-         <br>
+        <br>
 
-
-         <div style = "width:80%;">
+        <div style = "width:80%;">
             <center>
 
                <button style = "border:0px; background-color:#4285F4; margin-top:8%;

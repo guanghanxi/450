@@ -2,6 +2,15 @@
 
 {% block content %}
     <h1>Machine List</h1>
+    <div class="search-div" >
+        <!-- https://www.w3schools.com/howto/howto_css_search_button.asp -->
+        <form>
+            <input type="text" placeholder="Search.." name="search"
+            {% if search %} value="{{ search }}" {% endif %}
+            >
+            <button type="submit"><i class="fa fa-search"></i></button>
+        </form>
+    </div>
     {% if machine_list %}
     <ul>
         {% for machine in machine_list %}
@@ -11,6 +20,6 @@
         {% endfor %}
     </ul>
     {% else %}
-        <p>There are no machines in the database.</p>
+        <p>There are no machines data {% if search %}related to {{search}}{% endif %} in the database.</p>
     {% endif %}
 {% endblock %}
