@@ -35,19 +35,12 @@ class EstimatorView(View):
     def post(self, request):
 
         life = float(request.POST.get('life'))
-
         area = float(request.POST.get('area'))
 
-        num_materials = Material.objects.all().count()
-
-        num_energy = Energy.objects.all().count()
-
-        print(request.POST)
+        # print(request.POST)
 
         material_cal=[]
-
         i=1
-
         material_id_set=set()
 
         while True:
@@ -73,9 +66,7 @@ class EstimatorView(View):
 
         cons_energy_cal = []
         dml_energy_cal = []
-
         energy_id_set=set()
-
         i=1
 
         while True:
@@ -100,7 +91,6 @@ class EstimatorView(View):
                 i+=1
             else:
                 break
-
 
         ctx =  {"total_emission" :355, "mlist": material_cal, "c_energy_list": cons_energy_cal, "d_energy_list": dml_energy_cal, "life": life, "area": area }
 
@@ -211,4 +201,4 @@ class MachineDetailView(generic.ListView):
         ctx = {'machine': machines.name , 'performance': machines.performance, 'mp_list': MachinePerformance.objects.filter(machine = pk) }
         return render(request, 'estimator/machine_detail.html', ctx)
 
-
+# Real Time Test
