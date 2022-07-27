@@ -1,10 +1,24 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-  <h1>Carbon Emission Estimation System</h1>
-  <p>Welcome to Carbon Emission System, a website developed by <em>Ever Green</em>!</p>
-  <h2>Dynamic content</h2>
-  <p>The System has the following record counts:</p>
+  <div class="head-div">
+        <div class="head-title">
+          <h1>Building Carbon Emission Estimation System</h1>
+          <p>Welcome to Building Carbon Emission System, a website developed by <em>Ever Green</em>!</p>
+          <p>In this system, you can check building carbon emission coefficients in the database.</p>
+          <p>In this system, you can estimate carbon emission of buildings</p>
+        </div>
+        <div class = "logo-div">
+          {% load static %}
+          <img class="logo" src="{% static 'image/evergreen.png' %}" alt="Ever Green Logo" />
+          <img class="logo" src="{% static 'image/JI_logo.png' %}" alt="JI Logo"/>
+        </div>
+  </div>
+  <h2>Estimator</h2>
+  <p>The System supports the Life-Cycle Carbon Emission of Buildings.</p>
+  <p>You can input parameters of a building to estimate its life-cycle carbon emission.</p>
+  <h2>Database</h2>
+  <p>In this system, you can check four types of data. The system has the following record counts:</p>
   <ul>
     <li><strong>Materials:</strong> {{ num_materials }}</li>
     <li><strong>Transportations:</strong> {{ num_trans }}</li>

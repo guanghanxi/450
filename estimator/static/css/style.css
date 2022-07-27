@@ -32,11 +32,11 @@ h1,h2,h3{
 }
 
 h1 {
-    font-size: 40px;
+    font-size: 32px;
 }
 
 h2 {
-    font-size: 30px;
+    font-size: 24px;
 }
 
 p {
@@ -223,8 +223,34 @@ footer h2{
 
 /*search*/
 .search-div{
-    position: sticky;
-    top: 0;
-    left: 0;
     margin: 0;
+}
+
+
+/*logo */
+
+.head-div{
+    display: grid;
+    grid-template-columns: 5fr 2fr;
+    margin: 10px 0;
+    padding: 0;
+    grid-column-gap: 0;
+}
+
+.head-title{
+    grid-column: 1 / span 1;
+    padding: 0;
+    margin: 0;
+}
+
+.logo-div{
+    grid-column: 2 / span 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin:0;
+}
+
+.logo{
+    width: 50%;
 }
