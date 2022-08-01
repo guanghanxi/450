@@ -254,3 +254,10 @@ footer h2{
 .logo{
     width: 50%;
 }
+
+/*link */
+
+.intext-link{
+    color: Navy;
+    text-decoration: underline;
+}

@@ -95,7 +95,9 @@
                <input type = "text" class = "material-volume"  placeholder = "0" value = "0" name = "volume-material" oninput="this.value=this.value.replace(/[^0-9\.]/g,'')"/>
                 <select name = "trans-material" class = "material-trans"  value="1"/>
                 {% for transportation in transportation_list %}
-                    <option value = "{{transportation.id}}">{{transportation.name}}</option>
+                    <option value = "{{transportation.id}}">{{transportation.name}}
+                    {% if transportation.volume == 0 %} {%else%} ({{transportation.volume}}{{transportation.unit}}){% endif %}
+                    </option>
                 {% endfor %}
                 </select>
             </div>
@@ -108,7 +110,7 @@
 
          <br>
 
-        <h3>Construction Stage Energy</h3>
+        <h3>Energy Usage</h3>
 
         <br>
 

@@ -15,13 +15,14 @@
         <h2>General Energy</h2>
         <table border="3" cellspacing="10" id="energy">
             <tr>
-                <th></th> <th>Energy Name</th>  <th>Carbon Emission Factor (kg C0<sub>2</sub> e/TJ)</th> <th>Carbon Oxidation Rate</th>
+                <th></th> <th>Energy Name</th>  <th>Carbon Emission Factor (kg CO<sub>2</sub> e/TJ)</th> <th>Carbon Oxidation Rate</th>
                  <th>Carbon Emission per Carlorific (tC/TJ)</th>
             </tr>
         {% for energy in energy_list %}
             <tr>
-            <td>{{energy.id }}</td> <td>{{ energy.name }}({{energy.unit}})</td> <td>{{energy.carbon_emission_factor}}</td> <td>{{energy.carbon_oxidation_rate}} </td>
-            <td>{{energy.carbon_per_carlorific}}</td>
+            <td>{{energy.id }}</td> <td>{{ energy.name }}({{energy.unit}})</td> <td>{{energy.carbon_emission_factor}}</td>
+            <td> {% if energy.carbon_oxidation_rate == 0 %} None {%else%}{{energy.carbon_oxidation_rate}}{% endif %} </td>
+            <td> {% if energy.carbon_per_carlorific == 0 %} None {%else%}{{energy.carbon_per_carlorific}}{% endif %} </td>
             </tr>
         {% endfor %}
         </table>

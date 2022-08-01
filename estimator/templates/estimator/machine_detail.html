@@ -1,7 +1,7 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-    <h1>various specifications of {{machine}}</h1>
+    <h1>Various Specifications of {{machine}}</h1>
     {% if mp_list %}
         <table border="3" cellspacing="10">
             <tr>
@@ -9,7 +9,7 @@
             </tr>
         {% for mp in mp_list %}
             <tr>
-            <td>{{ mp.name }}</td> <td>{{mp.energy}}</td> <td>{{mp.energy_volume}} </td>
+            <td>{{ mp.name }}</td> <td>{{mp.energy}}</td> <td>{{mp.energy_volume}}  {{mp.energy_unit}}</td>
             </tr>
         {% endfor %}
         </table>

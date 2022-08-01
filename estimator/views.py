@@ -198,7 +198,17 @@ class MachineDetailView(generic.ListView):
 
         machines = Machine.objects.get(id=pk)
 
-        ctx = {'machine': machines.name , 'performance': machines.performance, 'mp_list': MachinePerformance.objects.filter(machine = pk) }
+        mp_list = MachinePerformance.objects.filter(machine = pk)
+        new_mp_list = []
+        for mp in mp_list:
+            tmp={}
+            tmp['energy'] = mp.energy
+            tmp['name'] = mp.name
+            tmp['energy_volume'] = mp.energy_volume
+            tmp["energy_unit"] = mp.energy.unit
+            new_mp_list.append(tmp)
+
+        ctx = {'machine': machines.name , 'performance': machines.performance, 'mp_list': new_mp_list}
         return render(request, 'estimator/machine_detail.html', ctx)
 
 # Real Time Test

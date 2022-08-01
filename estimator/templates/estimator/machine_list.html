@@ -15,7 +15,7 @@
     <ul>
         {% for machine in machine_list %}
         <li>
-            <a href="{% url 'machine_detail'  machine.id %}">{{ machine.name }} (Performance Index: {{machine.performance}})</a>
+            <a class ="intext-link" href="{% url 'machine_detail'  machine.id %}">{{ machine.name }} (Performance Index: {{machine.performance}})</a>
         </li>
         {% endfor %}
     </ul>
