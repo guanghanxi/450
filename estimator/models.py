@@ -22,6 +22,8 @@ class Material(models.Model):
 
     carbon_emission_factor = models.FloatField()
 
+    equivalent_mass = models.FloatField()
+
     def __str__(self):
         """String for representing the Model object."""
         return self.name

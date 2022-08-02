@@ -121,6 +121,7 @@
             </div>
             <div class = "energy-row  headers">
                <div class = "cons-energy-volume">Construction Stage</div>
+               <div class = "opt-energy-volume">Operation Stage (Annual)</div>
                <div class = "dml-energy-volume">Demolition Stage</div>
             </div>
             <div class = "energy-row" id="energy-readroot">
@@ -129,6 +130,7 @@
                   <option value = "{{energy.id}}">{{energy.name}} ({{energy.unit}})</option>
                 {% endfor %}
                 <input type = "text" class = "cons-energy-volume" placeholder = "0" value = "0" name = "volume-cons-energy" oninput="this.value=this.value.replace(/[^0-9\.]/g,'')"/>
+                <input type = "text" class = "opt-energy-volume" placeholder = "0" value = "0" name = "volume-opt-energy" oninput="this.value=this.value.replace(/[^0-9\.]/g,'')"/>
                 <input type = "text" class = "dml-energy-volume" placeholder = "0" value = "0" name = "volume-dml-energy" oninput="this.value=this.value.replace(/[^0-9\.]/g,'')"/>
             </div>
             <span id="energy-writeroot"></span>
@@ -137,6 +139,7 @@
                 <a href='#energy-writeroot' id="lessEnergy" class="rm" onclick="lessFields('energy')">Remove Energy</a>
             </div>
         </div>
+        <p><strong>Notice: 1 tJ = 2.7778 &#215 10<sup>5</sup> kWh </strong></strong></p>
 
         <br>
 

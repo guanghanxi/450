@@ -5,8 +5,8 @@
         <div class="head-title">
           <h1>Building Carbon Emission Estimation System</h1>
           <p>Welcome to Building Carbon Emission System, a website developed by <em>Ever Green</em>!</p>
-          <p>In this system, you can check buildings' carbon emission coefficients in the database.</p>
-          <p>In this system, you can estimate carbon emission of buildings</p>
+          <p>In this system, you can check building carbon emission coefficients in the database.</p>
+          <p>In this system, you can estimate carbon emission of buildings.</p>
         </div>
         <div class = "logo-div">
           {% load static %}
@@ -15,14 +15,16 @@
         </div>
   </div>
   <h2>Estimator</h2>
-  <p>The System supports the <a class='intext-link' href="{% url 'estimators' %}"><strong>Life-Cycle Carbon Emission of Buildings</strong> </a></p>
+  <p>The System supports the <a class='intext-link' href="{% url 'estimators' %}"><strong>Life-Cycle Carbon Emission of Buildings.</strong> </a></p>
   <p>You can input parameters of a building to estimate its life-cycle carbon emission.</p>
   <h2>Database</h2>
   <p>In this system, you can check four types of data. The system has the following record counts:</p>
   <ul>
-    <li><strong><a class='intext-link' href="{% url 'materials' %}">Materials</a>:</strong> {{ num_materials }}</li>
-    <li><strong><a class='intext-link' href="{% url 'transportation' %}">Transportations</a>:</strong> {{ num_trans }}</li>
-    <li><strong><a class='intext-link' href="{% url 'energy' %}">Energies</a>:</strong>{{ num_energy }}</li>
-    <li><strong><a class='intext-link' href="{% url 'machine' %}">machines</a>:</strong> {{ num_machine }}</li>
+    <li><strong><a class='intext-link' href="{% url 'materials' %}">Material</a>:</strong> {{ num_materials }}</li>
+    <li><strong><a class='intext-link' href="{% url 'transportation' %}">Transportation</a>:</strong> {{ num_trans }}</li>
+    <li><strong><a class='intext-link' href="{% url 'energy' %}">Energy</a>:</strong> {{ num_energy }}</li>
+    <li><strong><a class='intext-link' href="{% url 'machine' %}">Machine</a>:</strong> {{ num_machine }}</li>
   </ul>
+  <h2>Source</h2>
+  <p>Data and building carbon emission estimation models come from the <em>GB/T 51366-2019, Standard for Building Carbon Emission Calculation</em>. </p>
 {% endblock %}

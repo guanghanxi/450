@@ -1,16 +1,16 @@
-Portland Cement,735,t
-C30 Concrete,295,m3
-C50 Concrete,385,m3
-Calcium Hydroxide,747,t
-Gypsum,32.8,t
-Sand (f=1.6~3.0),2.51,t
-Gravel (d=10mm~30mm),2.18,t
-Shale,5.08,t
-Clay,2.69,t
-Pig Iron for Steelmaking,1700,t
-Maintenance of Blast Furnace Plan,2280,t
-Electric Furnace Steel,3030,t
-Polyethylene,3600,t
-PVC-U,7930,t
-PVC,7300,t
-Water Supply,0.168,t
+Portland Cement,735,t,1
+C30 Concrete,295,m3,2.385
+C50 Concrete,385,m3,2.42
+Calcium Hydroxide,747,t,1
+Gypsum,32.8,t,1
+Sand (f=1.6~3.0),2.51,t,1
+Gravel (d=10mm~30mm),2.18,t,1
+Shale,5.08,t,1
+Clay,2.69,t,1
+Pig Iron for Steelmaking,1700,t,1
+Maintenance of Blast Furnace Plan,2280,t,1
+Electric Furnace Steel,3030,t,1
+Polyethylene,3600,t,1
+PVC-U,7930,t,1
+PVC,7300,t,1
+Water Supply,0.168,t,1

@@ -1,6 +1,10 @@
 from django.shortcuts import render
 from django.views import View
 
+# import life-cycle carbon emission estimation model
+
+from .carbon_emission_model import life_cycle_emission
+
 # Create your views here.
 
 from .models import Unit, Material, Energy, OtherEnergy, Transportation, Machine, MachinePerformance
@@ -56,9 +60,11 @@ class EstimatorView(View):
                     if  tmp_volume!=0:
                         index = int(tmp_id)
                         tmp_mtr = Material.objects.get(id=index)
-                        tmp_dict = {'id':index, 'name': tmp_mtr.name, 'factor': tmp_mtr.carbon_emission_factor, 'unit': tmp_mtr.unit, 'volume': tmp_volume}
+                        tmp_dict = {'id':index, 'name': tmp_mtr.name, 'factor': tmp_mtr.carbon_emission_factor, 'mass': tmp_mtr.equivalent_mass, 'volume': tmp_volume}
                         tmp_dict['trans_id'] = request.POST.get('trans-'+ field_name)
-                        tmp_dict['trans_name'] = Transportation.objects.get(id=tmp_dict['trans_id']).name
+                        tmp_trans = Transportation.objects.get(id=tmp_dict['trans_id'])
+                        tmp_dict['trans_name'] = tmp_trans.name
+                        tmp_dict['trans_factor'] = tmp_trans.carbon_emission_factor
                         material_cal.append(tmp_dict)
                 i+=1
             else:
@@ -66,6 +72,7 @@ class EstimatorView(View):
 
         cons_energy_cal = []
         dml_energy_cal = []
+        opt_energy_cal = []
         energy_id_set=set()
         i=1
 
@@ -80,11 +87,15 @@ class EstimatorView(View):
                     index = int(tmp_id)
                     tmp_eng = Energy.objects.get(id=index)
                     cons_volume =  float(request.POST.get('volume-cons-'+field_name))
+                    opt_volume =  float(request.POST.get('volume-opt-'+field_name))
                     dml_volume =  float(request.POST.get('volume-dml-'+field_name))
                     energy_id_set.add(tmp_id)
                     if cons_volume!=0:
                         tmp_cons_dict = {'id':index, 'name': tmp_eng.name, 'factor': tmp_eng.carbon_emission_factor, 'volume': cons_volume}
                         cons_energy_cal.append(tmp_cons_dict)
+                    if opt_volume!=0:
+                        tmp_opt_dict = {'id':index, 'name': tmp_eng.name, 'factor': tmp_eng.carbon_emission_factor, 'volume': opt_volume}
+                        opt_energy_cal.append(tmp_opt_dict)
                     if dml_volume!=0:
                         tmp_dml_dict = {'id':index, 'name': tmp_eng.name, 'factor': tmp_eng.carbon_emission_factor, 'volume': dml_volume}
                         dml_energy_cal.append(tmp_dml_dict)
@@ -92,7 +103,9 @@ class EstimatorView(View):
             else:
                 break
 
-        ctx =  {"total_emission" :355, "mlist": material_cal, "c_energy_list": cons_energy_cal, "d_energy_list": dml_energy_cal, "life": life, "area": area }
+        t_emission = life_cycle_emission(material_cal, cons_energy_cal, opt_energy_cal, dml_energy_cal, life, area )
+
+        ctx =  {"total_emission" :t_emission, "mlist": material_cal, "c_energy_list": cons_energy_cal, "o_energy_list": opt_energy_cal, "d_energy_list": dml_energy_cal, "life": life, "area": area }
 
         return render(request, 'estimator/evaluate_result.html', ctx)
 

@@ -3,9 +3,9 @@
 {% block content %}
   <h1>Carbon Emission Result</h1>
   <h2>Building Parameters</h2>
-  <p id="life">Anticipated Service Life: {{life}}</p>
+  <p id="life"><strong>Anticipated Service Life:</strong> {{life}} Years </p>
 
-  <p id = "area">Area: {{area}}<p>
+  <p id = "area"><strong>Area: </strong>{{area}} m<sup>2</sup><p>
 
 
   <h3>Material</h3>
@@ -38,6 +38,20 @@
       {% endfor %}
   </div>
 
+  <h3>Opeperatition Stage Energy Usage</h3>
+  <div class="content-container">
+      <div class = "energy-row headers">
+          <div class = "energy-name">Energy</div>
+          <div class = "energy-volume">Energy Volume (Unit: TJ)</div>
+      </div>
+      {% for energy in o_energy_list %}
+      <div class = "energy-row">
+          <div class = "energy-name">{{energy.name}}</div>
+          <div class = "energy-volume">{{energy.volume}} </div>
+      </div>
+      {% endfor %}
+  </div>
+
   <h3>Demolition Stage Energy Usage</h3>
   <div class="content-container">
       <div class = "energy-row headers">
@@ -53,5 +67,5 @@
   </div>
 
   <h2>Results</h2>
-  <p><strong>Carbon Emission Evaluation: </strong> {{ total_emission }} t CO<sub>2</sub></p>
+  <h3><em>Building Life-Cycle Carbon Emission Evaluation: </em> {{ total_emission }} t CO<sub>2</sub> / m<sup>2</sup></h3>
 {% endblock %}

@@ -34,7 +34,7 @@ def run():
     for row in mtreader:
         print(row)
         u, created = Unit.objects.get_or_create(name=row[2])
-        mt, created = Material.objects.get_or_create(name=row[0], unit = u, carbon_emission_factor = float(row[1]))
+        mt, created = Material.objects.get_or_create(name=row[0], unit = u, carbon_emission_factor = float(row[1]), equivalent_mass = float(row[3]))
 
     for row in ereader:
         print(row)
